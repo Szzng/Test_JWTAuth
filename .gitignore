@@ -1,0 +1,10 @@
+secrets.json
+settings.py
+__pycache__
+__pycache__/
+db.sqlite3
+*.sqlite3
+*.log
+*.pot
+*.pyc
+media
