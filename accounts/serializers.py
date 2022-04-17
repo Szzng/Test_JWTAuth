@@ -19,7 +19,7 @@ class RegisterSerializer(serializers.Serializer):
 
     def validate_email(self, email):
         if UserModel.objects.filter(email=email).exists():
-            raise serializers.ValidationError(
+            raise ValidationError(
                 _(email + " : 이미 가입된 이메일 주소입니다."),
             )
         validate_email(email)
@@ -28,15 +28,13 @@ class RegisterSerializer(serializers.Serializer):
     def validate_password1(self, password):
         min_length = 8
         if len(password) < min_length:
-            raise serializers.ValidationError(
-                _("비밀번호는 최소 {0}자 이상으로 만들어주세요.").format(min_length)
-            )
+            raise ValidationError(_("비밀번호는 최소 {0}자 이상으로 만들어주세요.").format(min_length))
         validate_password(password)
         return password
 
     def validate(self, data):
         if data["password1"] != data["password2"]:
-            raise serializers.ValidationError(_("두 비밀번호가 일치하지 않습니다."))
+            raise ValidationError(_("두 비밀번호가 일치하지 않습니다."))
         return data
 
     def get_cleaned_data(self):
