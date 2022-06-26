@@ -101,3 +101,23 @@ class JWTSerializer(serializers.Serializer):
     def get_user(self, obj):
         user_data = UserDetailSerializer(obj["user"], context=self.context).data
         return user_data
+
+# class LoginSerializer(serializers.Serializer):
+#     name = serializers.CharField(required=True)
+#     ip = serializers.CharField(required=True)
+#
+#     def validate(self, data):
+#         try:
+#             school = School.objects.get(name=data['name'])
+#         except:
+#             raise ValidationError(_("가입되지 않은 학교 이름입니다."))
+#         else:
+#             ip = ".".join(data['ip'].split('.')[:-1])
+#             if school.ip != ip:
+#                 raise ValidationError(_("IP 주소가 일치하지 않습니다. 학교 컴퓨터를 이용하여 접속해주세요."))
+#         return school
+#
+#
+# class JWTSerializer(serializers.Serializer):
+#     access_token = serializers.CharField()
+#     access_token_expiration = serializers.IntegerField()
